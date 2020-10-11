@@ -1,0 +1,48 @@
+.jumbotron {
+    padding: 2rem 2rem;
+    margin: 2rem;
+}
+
+#main{
+    text-align: center;
+}
+
+#gameBoard{
+    background-color: aliceblue;
+}
+
+#rock, #paper, #scissors{
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 80px;
+    height: 65px;
+    margin: 0 10px;
+}
+
+#rock{
+    background-image: url("../img/rock.png");
+}
+
+#paper{
+    background-image: url("../img/paper.png");
+}
+
+#scissors{
+    background-image: url("../img/scissors.png");
+}
+
+.userChoiceImg{
+    width: 50px;
+    height: 41px;
+}
+
+.computerChoiceImg{
+    width: 50px;
+    height: 41px;
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+}
+
+.avatar{
+    height: 180px;
+}

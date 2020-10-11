@@ -1,0 +1,30 @@
+Legendary Rock Paper Scissors 
+
+Pre-requisite:
+- Java 8
+- Maven
+
+Compile, build and run tests:
+- mvn clean install
+
+Run the application:
+- mvn spring-boot:run
+
+Then the application will be available on the port 8080:
+http://localhost:8080/
+
+The game
+
+Rules:
+- Paper beats (wraps) rock
+- Rock beats (blunts) scissors
+- Scissors beats (cuts) paper.
+
+Rounds:
+- You can choose to play in Best of 3, 5, 7 or 9
+
+Levels:
+- The game has 4 Levels available -> EASY, MEDIUM, HARD and CHUCK_NORRIS
+
+Opponents:
+- Each Level has a set of opponents available, try to beat them!

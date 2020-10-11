@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Legendary Rock Paper Scissors</title>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/custom.css}" />
+</head>
+<body>
+    <div class="container">
+        <div id="main" class="jumbotron mt-5">
+            <h3>Welcome to the Lengedary Rock Paper Scissors!</h3>
+            <h5>Select the number of rounds and the opponent's level.</h5>
+
+            <form action="#" th:action="@{/start}" method="post" th:object="${gamePlay}" class="mt-5">
+                <div class="form-group">
+                    <h6>Rounds</h6>
+                    <div class="form-check-inline">
+                        <div th:each="round : ${gamePlay.numberOfRoundsAvailable}">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" th:field="*{rounds}" th:value="${round}">
+                                <label class="form-check-label" th:for="${#ids.prev('rounds')}" th:text="${round}">round</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <h6>Level</h6>
+                    <div class="form-check-inline">
+                        <div th:each="level : ${T(com.ggcorreia.rpsgame.enums.Level).values()}">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" th:field="*{level}" th:value="${level}">
+                                <label class="form-check-label" th:for="${#ids.prev('level')}" th:text="${level}">level</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-4 offset-4">
+                    <label for="playerName">Player Name</label>
+                    <input type="text" class="form-control" id="playerName" th:field="*{playerName}" th:value="${gamePlay.playerName}">
+                    <td th:if="${#fields.hasErrors('playerName')}" th:errors="*{playerName}">Player Name is required!</td>
+                </div>
+                <button class="btn btn-primary" type="submit">Start Game!</button>
+            </form>
+
+        </div>
+    </div>
+    <script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/1.16.0/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/4.5.2/js/bootstrap.min.js}"></script>
+</body>
+</html>

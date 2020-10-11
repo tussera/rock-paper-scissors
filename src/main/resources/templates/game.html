@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Legendary Rock Paper Scissors</title>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/custom.css}" />
+</head>
+<body>
+    <div class="container">
+        <div id="main" class="jumbotron mt-3 align-items-center">
+            <h3>Lengendary Rock Paper Scissors!</h3>
+            <br/>
+            <form action="#" th:action="@{/play}" method="post" th:object="${gamePlay}">
+                <div id="gameBoard" class="shadow container rounded-lg mb-2 p-2">
+                    <div class="row justify-content-center align-items-center">
+                        <div class="col-4">
+                            <div class="column">
+                                <h5 th:text="${gamePlay.userPlayer.name}"></h5>
+                                <img class="avatar rounded-circle" th:src="@{${'/img/' + gamePlay.userPlayer.getAvatar()}}">
+                            </div>
+                        </div>
+
+                        <div class="col-4">
+                            <div class="row justify-content-center align-items-center">
+                                <div class="mt-5">
+                                    <img class="userChoiceImg" th:unless="${gamePlay.getUserPlayer().getChoice()==null}" th:src="@{${'/img/' + gamePlay.getUserPlayerChoiceImg()}}">
+                                </div>
+                                <div class="column">
+                                    <h4 class="mb-5" th:text="'Best of ' + ${gamePlay.rounds}"></h4>
+                                    <h4>Score</h4>
+                                    <h5 th:text="${gamePlay.userPlayer.points} + ' X ' + ${gamePlay.computerPlayer.points}"></h5>
+                                </div>
+                                <div class="mt-5">
+                                    <img class="computerChoiceImg" th:unless="${gamePlay.getComputerPlayer().getChoice()==null}" th:src="@{${'/img/' + gamePlay.getComputerPlayerChoiceImg()}}">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-4">
+                            <div class="column">
+                                <h5 th:text="${gamePlay.computerPlayer.name}"></h5>
+                                <img class="avatar rounded-circle" th:src="@{${'/img/' + gamePlay.computerPlayer.getAvatar()}}">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="roundResult" class="row justify-content-center">
+                        <div class="column justify-content-center">
+                            <h4>Round Result</h4>
+                            <h5 th:text="${gamePlay.roundResult != null ? gamePlay.roundResult.name() : 'Not started..'}"
+                                th:style="${gamePlay.roundResult != null ?
+                                  (gamePlay.roundResult.name().equals('WIN') ? 'background-color: green' :
+                                    (gamePlay.roundResult.name().equals('LOSE') ? 'background-color: red' : 'background-color: yellow'))
+                                     : 'background-color: orange'}"></h5>
+                        </div>
+                    </div>
+                    <h4>Select your play:</h4>
+                    <div class="row justify-content-center">
+                        <button id="rock" type="submit" name="action" value="rock" th:disabled="${gamePlay.isGameFinished()}"/>
+                        <button id="paper" type="submit" name="action" value="paper" th:disabled="${gamePlay.isGameFinished()}"/>
+                        <button id="scissors" type="submit" name="action" value="scissors" th:disabled="${gamePlay.isGameFinished()}"/>
+                    </div>
+                </div>
+                <div th:if="${gamePlay.isGameFinished()}" class="container">
+                    <h3>The game has Finished!</h3>
+                    <h4 th:if="${gamePlay.isGameFinished()}" th:text="'Winner: ' + ${gamePlay.isUserWinner() ? gamePlay.userPlayer.getName() : gamePlay.getComputerPlayer().getName()}"></h4>
+                </div>
+                <div class="row justify-content-center">
+                    <button class="btn btn-primary m-2" id="playAgain" type="submit" name="action" value="playAgain" th:disabled="${!gamePlay.isGameFinished()}">Play Again</button>
+                    <button class="btn btn-primary m-2" id="changeOpponent" type="submit" name="action" value="changeOpponent" th:disabled="${!gamePlay.isGameFinished()}">Change Opponent</button>
+                    <button class="btn btn-warning m-2" id="back" type="submit" name="action" value="back">Back</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/1.16.0/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/4.5.2/js/bootstrap.min.js}"></script>
+</body>
+</html>
